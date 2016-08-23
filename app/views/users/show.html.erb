@@ -1,0 +1,10 @@
+<h1>Welcome, <%= @user.fname %>!</h1>
+<ul><h2>Accounts:</h2>
+  <% @accounts.each do |a| %>
+    <li>
+      <h3><%= link_to a.account_name, account_path(@user, a) %></h3>
+      <h4>Current Balance: <%= Money.new(@transactions.where(:account_id => a.id).last.current_amount_cents).format %></h4>
+    </li>
+  <% end %>
+</ul>
+
