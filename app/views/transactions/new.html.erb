@@ -3,12 +3,17 @@
   <li style="color:red;"> <%= v.to_s %> </li>
 <% end %>
 <%= form_for @transaction, url: save_new_transaction_path, html: { method: :post } do |f| %>
-  <h2> <%= f.radio_button :transaction_name, 'withdraw' %>
-  <%= f.label :transaction_name_withdraw, 'Withdraw' %>
-  <%= f.radio_button :transaction_name, 'deposit' %>
-  <%= f.label :transaction_name_deposit, 'Deposit' %> </h2>
+  <h2>
+    <% unless @transactions.blank? || @transactions.last.current_amount_cents <= 0 %>
+      <%= f.radio_button :transaction_name, 'withdraw' %>
+      <%= f.label :transaction_name_withdraw, 'Withdraw' %>
+    <% end %>
+    <%= f.radio_button :transaction_name, 'deposit' %>
+    <%= f.label :transaction_name_deposit, 'Deposit' %>
+  </h2>
   <h3> <%= f.label :amount_cents, "Amount" %> </h3>
-
   <%= f.text_field :amount_cents %>
   <%= f.submit "Submit", :disable_with => 'Submitting...' %>
 <% end %>
+
+<h4><a href="/users/<%= @user.id %>/accounts/<%= @account.id %>">Back to <%= @account.account_name.capitalize %> Account</a></h4>

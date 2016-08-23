@@ -4,6 +4,7 @@ class Transaction < ActiveRecord::Base
   belongs_to :account
 
   validates :amount_cents, presence: true, numericality: { greater_than_or_equal_to: 100 }
+  validates :current_amount_cents, presence: true, numericality: { greater_than_or_equal_to: 0 }
   validates_presence_of :transaction_name
 
   def withdraw?

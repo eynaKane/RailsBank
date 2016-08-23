@@ -8,10 +8,18 @@ class User < ActiveRecord::Base
   end
 
   def savings_balance
-    self.transactions.where(account_id: 1).last.current_amount_cents
+    unless self.transactions.where(account_id: 1).blank?
+      self.transactions.where(account_id: 1).last.current_amount_cents
+    else
+      0
+    end
   end
 
   def checking_balance
-    self.transactions.where(account_id: 2).last.current_amount_cents
+    unless self.transactions.where(account_id: 2).blank?
+      self.transactions.where(account_id: 2).last.current_amount_cents
+    else
+      0
+    end
   end
 end

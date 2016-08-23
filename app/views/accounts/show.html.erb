@@ -1,17 +1,29 @@
 <h1> <%= @user.fname %>'s <%= @account.account_name %> Account! </h1>
-<h2>Current Balance: <%= Money.new(@transactions.where(:account_id => @account.id).last.current_amount_cents).format %></h2>
-<h3> <%= link_to "Add Transaction", new_transaction_path(@user, @account) %> </h3>
-<table border=1; cellpadding="10px"> <h3> Transactions </h3>
-  <tr>
-    <th> Type </th>
-    <th> Amount </th>
-    <th> Date </th>
-  </tr>
-  <% @transactions.each do |t| %>
-    <tr>
-      <td> <%= t.transaction_name.capitalize %> </td>
-      <td> <%= Money.new(t.amount_cents).format %> </td>
-      <td> <%= t.created_at %> </td>
-    </tr>
+<h2> Current Balance:
+  <% if @transactions.blank? %>
+    $0.00
+  <% else %>
+    <%= Money.new(@transactions.last.current_amount_cents).format %>
   <% end %>
-</table>
+</h2>
+<h3> <%= link_to "Add Transaction", new_transaction_path(@user, @account) %> </h3>
+<% if @transactions.blank? %>
+  <h4>You have no transactions under this account.</h4>
+<% else %>
+  <table border=1; cellpadding="10px"> <h3> Transactions </h3>
+    <tr>
+      <th> Type </th>
+      <th> Amount </th>
+      <th> Date </th>
+    </tr>
+    <% @transactions.each do |t| %>
+      <tr>
+        <td> <%= t.transaction_name.capitalize %> </td>
+        <td> <%= Money.new(t.amount_cents).format %> </td>
+        <td> <%= t.created_at %> </td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
+
+<h4><a href="/users/<%= @user.id %>">Back to My Accounts</a></h4>

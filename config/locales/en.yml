@@ -33,5 +33,7 @@ en:
             amount_cents:
               blank: "Please enter amount."
               greater_than_or_equal_to: "Please enter amount greater than or equal to $1."
+            current_amount_cents:
+              greater_than_or_equal_to: "You have insufficient funds."
             transaction_name:
               blank: "Please select transaction, withdraw or deposit."

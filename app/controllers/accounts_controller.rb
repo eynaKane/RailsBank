@@ -5,5 +5,4 @@ class AccountsController < ApplicationController
     @account = Account.find(params[:account_id])
     @transactions = @user.transactions.where(account_id: params[:account_id])
   end
-
 end
