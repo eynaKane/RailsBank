@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   get 'signup' => 'users#new', as: :new_user
   post 'signup' => 'users#create', as: :save_new_user
 
+  get 'signin' => 'sessions#new', as: :new_session
+  post 'signin' => 'sessions#create', as: :save_new_session
+
   get 'users/:id' => 'users#show', as: :user
 
   get 'users/:user_id/accounts/:account_id' => 'accounts#show', as: :account
