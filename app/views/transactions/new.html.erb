@@ -1,4 +1,5 @@
-<h1>Add Transaction for <%= @user.fname %>'s <%= @account.account_name %> Account!</h1>
+<h4><a href="/users/<%= @user.id %>/accounts/<%= @account.id %>" style="float:right;"> Back to <%= @account.account_name.capitalize %> Account </a></h4>
+<h1> Add <%= @account.account_name %> Account Transaction </h1>
 <% @transaction.errors.each do |_, v| %>
   <li style="color:red;"> <%= v.to_s %> </li>
 <% end %>
@@ -15,5 +16,3 @@
   <%= f.text_field :amount_cents %>
   <%= f.submit "Submit", :disable_with => 'Submitting...' %>
 <% end %>
-
-<h4><a href="/users/<%= @user.id %>/accounts/<%= @account.id %>">Back to <%= @account.account_name.capitalize %> Account</a></h4>

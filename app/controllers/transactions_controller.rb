@@ -9,7 +9,6 @@ class TransactionsController < ApplicationController
   end
 
   def create
-    byebug
     @user = User.find(params[:user_id])
     @account = Account.find(params[:account_id])
     @transactions = @user.transactions.where(account_id: @account.id)

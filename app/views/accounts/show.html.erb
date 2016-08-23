@@ -1,4 +1,5 @@
-<h1> <%= @user.fname %>'s <%= @account.account_name %> Account! </h1>
+<h4><a href="/users/<%= @user.id %>" style="float:right;"> Back to My Accounts </a></h4>
+<h1> <%= @user.fname %>'s <%= @account.account_name %> Account </h1>
 <h2> Current Balance:
   <% if @transactions.blank? %>
     $0.00
@@ -25,5 +26,3 @@
     <% end %>
   </table>
 <% end %>
-
-<h4><a href="/users/<%= @user.id %>">Back to My Accounts</a></h4>
