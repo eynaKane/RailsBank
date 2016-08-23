@@ -7,4 +7,11 @@ class User < ActiveRecord::Base
     self[:fname].capitalize
   end
 
+  def savings_balance
+    self.transactions.where(account_id: 1).last.current_amount_cents
+  end
+
+  def checking_balance
+    self.transactions.where(account_id: 2).last.current_amount_cents
+  end
 end

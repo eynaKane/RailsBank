@@ -13,8 +13,7 @@ class TransactionsController < ApplicationController
     if @transaction.save
       redirect_to account_path(@user, @account)
     else
-      render 'new'
-      #redirect_to new_transaction_path
+      redirect_to new_transaction_path
     end
   end
 
@@ -23,18 +22,18 @@ class TransactionsController < ApplicationController
   def transaction_params
     params.require(:transaction).permit(:transaction_name, :amount_cents)
       .merge(user_id: @user.id, account_id: @account.id,
-      current_amount_cents: calculate_current_amount_cents(params[:transaction][:amount_cents]))
+      current_amount_cents: calculate_current_amount_cents)
   end
 
-  def calculate_current_amount_cents(amount)
-    if params[:transaction][:transaction_name] == 'withdraw'
-      current_balance - amount.to_i
-    else
-      current_balance + amount.to_i
-    end
+  def calculate_current_amount_cents
+    Transaction.calculate_current_amount_cents(@user, @account, transaction_name, amount_cents)
   end
 
-  def current_balance
-    @user.transactions.where(account_id: @account.id).last.current_amount_cents
+  def transaction_name
+    params[:transaction][:transaction_name]
+  end
+
+  def amount_cents
+    params[:transaction][:amount_cents].to_i
   end
 end

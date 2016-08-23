@@ -25,4 +25,15 @@ class Transaction < ActiveRecord::Base
   #   Money.new(self[:current_amount_cents]).format
   # end
 
+  def self.calculate_current_amount_cents(user, account, transaction_name, amount_cents)
+    Transaction.balance(user, account) + Transaction.amount(transaction_name, amount_cents)
+  end
+
+  def self.balance(user, account)
+    account.id == 1 ? user.savings_balance : user.checking_balance
+  end
+
+  def self.amount(transaction_name, amount_cents)
+    transaction_name == 'withdraw' ? -amount_cents.to_i : amount_cents.to_i
+  end
 end
