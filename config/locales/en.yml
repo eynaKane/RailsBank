@@ -26,6 +26,12 @@ en:
       transaction:
         amount_cents: "Amount"
         transaction_name: "Transaction Name"
+      user:
+        fname: "First Name"
+        lname: "Last Name"
+        email: "Email"
+        password: "Password"
+        password_confirmation: "Password Confirmation"
     errors:
       models:
         transaction:
@@ -37,3 +43,16 @@ en:
               greater_than_or_equal_to: "You have insufficient funds."
             transaction_name:
               blank: "Please select transaction, withdraw or deposit."
+        user:
+          attributes:
+            fname:
+              blank: "First name can't be blank."
+            lname:
+              blank: "Last name can't be blank."
+            email:
+              blank: "Email can't be blank."
+            password:
+              blank: "Password can't be blank."
+            password_confirmation:
+              blank: "Password confirmation can't be blank."
+              confirmation: "Password confirmation doesn't match."

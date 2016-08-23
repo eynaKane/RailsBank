@@ -3,9 +3,14 @@ class User < ActiveRecord::Base
   has_many :accounts
   has_many :transactions
 
-  def fname
-    self[:fname].capitalize
-  end
+  has_secure_password
+
+  validates :fname, :lname, :email, :password_confirmation, presence: true
+  validates :password, confirmation: true
+
+  # def fname
+  #   self[:fname].capitalize
+  # end
 
   def savings_balance
     unless self.transactions.where(account_id: 1).blank?
