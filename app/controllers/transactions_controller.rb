@@ -13,27 +13,31 @@ class TransactionsController < ApplicationController
     if @transaction.save
       redirect_to account_path(@user, @account)
     else
-      redirect_to new_transaction_path
+      @transaction[:amount_cents] = params_amount_cents / 100
+      render 'new'
     end
   end
 
   private
 
   def transaction_params
-    params.require(:transaction).permit(:transaction_name, :amount_cents)
-      .merge(user_id: @user.id, account_id: @account.id,
-      current_amount_cents: calculate_current_amount_cents)
+    { user_id: @user.id, account_id: @account.id, transaction_name: params_transaction_name,
+      amount_cents: params_amount_cents, current_amount_cents: calculate_current_amount_cents }
   end
 
   def calculate_current_amount_cents
-    Transaction.calculate_current_amount_cents(@user, @account, transaction_name, amount_cents)
+    Transaction.calculate_current_amount_cents(@user, @account, params_transaction_name, params_amount_cents)
   end
 
-  def transaction_name
+  def params_transaction_name
     params[:transaction][:transaction_name]
   end
 
-  def amount_cents
-    params[:transaction][:amount_cents].to_i
+  def params_amount_cents
+    if !(params[:transaction][:amount_cents] !~ /\A\d+\.?\d{0,2}\z/)
+      params[:transaction][:amount_cents].to_f * 100
+    else
+      0
+    end
   end
 end

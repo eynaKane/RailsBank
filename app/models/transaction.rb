@@ -3,7 +3,8 @@ class Transaction < ActiveRecord::Base
   belongs_to :user
   belongs_to :account
 
-  validates :amount_cents, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
+  validates :amount_cents, presence: true, numericality: { greater_than_or_equal_to: 100 }
+  validates_presence_of :transaction_name
 
   def withdraw?
     self.transaction_name == 'withdraw'
@@ -34,6 +35,6 @@ class Transaction < ActiveRecord::Base
   end
 
   def self.amount(transaction_name, amount_cents)
-    transaction_name == 'withdraw' ? -amount_cents.to_i : amount_cents.to_i
+    transaction_name == 'withdraw' ? -amount_cents : amount_cents
   end
 end

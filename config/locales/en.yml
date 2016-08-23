@@ -21,3 +21,17 @@
 
 en:
   hello: "Hello world"
+  activerecord:
+    attributes:
+      transaction:
+        amount_cents: "Amount"
+        transaction_name: "Transaction Name"
+    errors:
+      models:
+        transaction:
+          attributes:
+            amount_cents:
+              blank: "Please enter amount."
+              greater_than_or_equal_to: "Please enter amount greater than or equal to $1."
+            transaction_name:
+              blank: "Please select transaction, withdraw or deposit."
