@@ -8,7 +8,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    if @user.save
+    if valid_signup_email? && @user.save
       session[:user_id] = @user.id
       redirect_to user_path(@user)
     else
@@ -16,21 +16,49 @@ class UsersController < ApplicationController
     end
   end
 
-  def show
-    @user = User.find(params[:user_id])
-    if session[:user_id] == @user.id
-      @accounts = Account.all
-      @transactions = @user.transactions
+  def edit
+    @user = User.find(session[:user_id])
+  end
+
+  def update
+    @user = User.find(session[:user_id])
+    if valid_edit_email? && @user.update_attributes(user_params)
+      @user.reload
+      redirect_to user_path(@user)
     else
-      flash[:notice] = "You don't have access to that order!"
-      redirect_to user_path(session[:user_id])
-      return
+      render 'edit'
     end
+  end
+
+  def show
+    @user = User.find(session[:user_id])
+    @accounts = Account.all
+    @transactions = @user.transactions
   end
 
   private
 
   def user_params
     params.require(:user).permit(:fname, :lname, :email, :password, :password_confirmation)
+  end
+
+  def valid_signup_email?
+    if User.find_by_email(@user.email)
+      @user.errors[:email] = "Email is invalid or already taken."
+      false
+    else
+      true
+    end
+  end
+
+  def valid_edit_email?
+    if params[:user][:email] == @user.email
+      true
+    elsif User.find_by_email(params[:user][:email])
+      @user.errors[:email] = "Email is invalid or already taken."
+      false
+    else
+      true
+    end
   end
 end

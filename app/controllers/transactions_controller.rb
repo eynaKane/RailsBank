@@ -4,16 +4,9 @@ class TransactionsController < ApplicationController
 
   def new
     @user = User.find(params[:user_id])
-    if session[:user_id] == @user.id
-      @account = Account.find(params[:account_id])
-      @transactions = @user.transactions.where(account_id: @account.id)
-
-      @transaction = Transaction.new
-    else
-      flash[:notice] = "You don't have access to that page!"
-      redirect_to user_path(session[:user_id])
-      return
-    end
+    @account = Account.find(params[:account_id])
+    @transactions = @user.transactions.where(account_id: @account.id)
+    @transaction = Transaction.new
   end
 
   def create

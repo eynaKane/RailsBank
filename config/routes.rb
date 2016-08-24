@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   delete 'signout' => 'sessions#destroy', as: :signout
 
   get 'users/:user_id' => 'users#show', as: :user
+  get 'users/:user_id/edit' => 'users#edit', as: :edit_user
+  patch 'users/:user_id' => 'users#update', as: :save_edit_user
 
   get 'users/:user_id/accounts/:account_id' => 'accounts#show', as: :account
 
