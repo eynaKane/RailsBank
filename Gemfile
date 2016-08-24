@@ -38,6 +38,32 @@ gem 'money'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+
+  gem 'cucumber-rails', :require => false
+  # database_cleaner is not required, but highly recommended
+  gem 'database_cleaner'
+  gem "factory_girl_rails", "~> 4.0"
+
+  # WebDriver is a tool for writing automated tests of websites. It aims to mimic the behaviour of a real user [...]
+  gem 'selenium-webdriver', '~> 2.42.0'
+
+  # Easy installation and use of chromedriver, the Chromium project's selenium webdriver adapter
+  gem 'chromedriver-helper', '~> 1.0.0'
+
+  # Poltergeist is a driver for Capybara that allows you to run your tests on a headless WebKit [...]
+  gem 'poltergeist', '~> 1.6.0'
+
+  # Auto-install phantomjs on demand for current platform. Comes with poltergeist integration
+  gem 'phantomjs', '~> 1.9.8.0', require: 'phantomjs/poltergeist'
+
+  # When a Cucumber step fails, it is useful to create a screenshot image and HTML file of the current page
+  gem 'capybara-screenshot', '~> 1.0.9'
+
+  # Rack middleware that provides access to rack.session environment
+  gem 'rack_session_access', '~> 0.1.1'
+
+  # SitePrism gives you a simple, clean and semantic DSL for describing your site using the Page Object Model
+  gem 'site_prism', '~> 2.7'
 end
 
 group :development do
