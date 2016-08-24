@@ -1,5 +1,8 @@
-<h4><a href="/users/<%= @user.id %>" style="float:right;"> Back to My Accounts </a></h4>
+<p><a href="/users/<%= @user.id %>" style="text-decoration: none;"> < Back to My Accounts </a></p>
 <h1> <%= @user.fname %>'s <%= @account.account_name %> Account </h1>
+<% if flash[:notice] %>
+  <div class="notice" style="color: red;"> <%= flash[:notice] %> </div>
+<% end %>
 <h2> Current Balance:
   <% if @transactions.blank? %>
     $0.00

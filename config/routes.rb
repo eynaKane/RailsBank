@@ -6,7 +6,9 @@ Rails.application.routes.draw do
   get 'signin' => 'sessions#new', as: :new_session
   post 'signin' => 'sessions#create', as: :save_new_session
 
-  get 'users/:id' => 'users#show', as: :user
+  delete 'signout' => 'sessions#destroy', as: :signout
+
+  get 'users/:user_id' => 'users#show', as: :user
 
   get 'users/:user_id/accounts/:account_id' => 'accounts#show', as: :account
 

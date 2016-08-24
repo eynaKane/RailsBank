@@ -1,4 +1,7 @@
 <h1>Welcome, <%= @user.fname %>!</h1>
+<% if flash[:notice] %>
+  <div class="notice" style="color: red;"> <%= flash[:notice] %> </div>
+<% end %>
 <h2>Accounts:</h2>
   <% @accounts.each do |a| %>
     <li>
