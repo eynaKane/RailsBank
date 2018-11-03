@@ -42,7 +42,7 @@ group :development, :test do
   gem 'cucumber-rails', :require => false
   # database_cleaner is not required, but highly recommended
   gem 'database_cleaner'
-  gem "factory_girl_rails"
+  gem "factory_bot"
 
   # WebDriver is a tool for writing automated tests of websites. It aims to mimic the behaviour of a real user [...]
   gem 'selenium-webdriver'
