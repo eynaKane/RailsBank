@@ -5,7 +5,8 @@
 # files.
 
 require 'cucumber/rails'
-require 'factory_girl_rails'
+require 'capybara/poltergeist'
+require 'factory_bot'
 
 require 'rack_session_access/capybara'
 require 'site_prism'
@@ -13,7 +14,7 @@ require 'site_prism'
 # Firefox is default
 # Capybara.javascript_driver = :selenium
 
-Capybara.default_wait_time = 10
+Capybara.default_max_wait_time = 10
 Capybara.default_selector = :css
 
 if ENV['USE_CHROME']
@@ -38,7 +39,8 @@ else
   end
 end
 
-Capybara.save_and_open_page_path = "#{Rails.root}/tmp/error_screenshots"
+# Capybara.save_and_open_page_path = "#{Rails.root}/tmp/error_screenshots"
+Capybara.save_path = "#{Rails.root}/tmp/error_screenshots"
 
 # Capybara defaults to CSS3 selectors rather than XPath.
 # If you'd prefer to use XPath, just uncomment this line and adjust any

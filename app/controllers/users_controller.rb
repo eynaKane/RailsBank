@@ -44,7 +44,7 @@ class UsersController < ApplicationController
 
   def valid_signup_email?
     if User.find_by_email(@user.email)
-      @user.errors[:email] = "Email is invalid or already taken."
+      @user.errors[:email] << "Email is invalid or already taken."
       false
     else
       true
@@ -55,7 +55,7 @@ class UsersController < ApplicationController
     if params[:user][:email] == @user.email
       true
     elsif User.find_by_email(params[:user][:email])
-      @user.errors[:email] = "Email is invalid or already taken."
+      @user.errors[:email] << "Email is invalid or already taken."
       false
     else
       true
