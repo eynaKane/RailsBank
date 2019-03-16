@@ -14,10 +14,10 @@ class ApplicationController < ActionController::Base
   end
 
   def require_user
-    unless current_user == params_user
-      flash[:notice] = "You don't have access to that page!"
-      session[:user_id] = nil
-      redirect_to new_session_path
-    end
+    return if current_user == params_user
+
+    flash[:notice] = "You don't have access to that page!"
+    session[:user_id] = nil
+    redirect_to new_session_path
   end
 end

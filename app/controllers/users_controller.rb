@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
-
-  before_action :require_user, only: [:edit, :update, :show]
+  before_action :require_user, only: %i[edit update show]
 
   def new
     @user = User.new
@@ -22,7 +21,7 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(session[:user_id])
-    if valid_edit_email? && @user.update_attributes(user_params)
+    if valid_edit_email? && @user.update(user_params)
       @user.reload
       redirect_to user_path(@user)
     else
@@ -43,8 +42,8 @@ class UsersController < ApplicationController
   end
 
   def valid_signup_email?
-    if User.find_by_email(@user.email)
-      @user.errors[:email] << "Email is invalid or already taken."
+    if User.find_by(email: @user.email)
+      @user.errors[:email] << 'Email is invalid or already taken.'
       false
     else
       true
@@ -54,8 +53,8 @@ class UsersController < ApplicationController
   def valid_edit_email?
     if params[:user][:email] == @user.email
       true
-    elsif User.find_by_email(params[:user][:email])
-      @user.errors[:email] << "Email is invalid or already taken."
+    elsif User.find_by(email: params[:user][:email])
+      @user.errors[:email] << 'Email is invalid or already taken.'
       false
     else
       true

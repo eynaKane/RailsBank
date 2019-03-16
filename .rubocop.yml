@@ -1,0 +1,31 @@
+AllCops:
+  EnabledByDefault: true
+  Exclude:
+    - bin/*
+    - config/**/*
+    - db/migrate/*
+    - db/schema.rb
+    - features/support/env.rb
+    - lib/tasks/cucumber.rake
+    - script/cucumber
+    - test/test_helper.rb
+
+Metrics/AbcSize:
+  Max: 20
+
+Metrics/LineLength:
+  Max: 100
+  Exclude:
+    - Gemfile
+
+Style/Copyright:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/DocumentationMethod:
+  Enabled: false
+
+Style/MethodCallWithArgsParentheses:
+  Enabled: false

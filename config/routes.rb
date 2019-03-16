@@ -1,21 +1,21 @@
 Rails.application.routes.draw do
 
-  get 'signup' => 'users#new', as: :new_user
-  post 'signup' => 'users#create', as: :save_new_user
+  get 'signup', to: 'users#new', as: :new_user
+  post 'signup', to: 'users#create', as: :save_new_user
 
-  get 'signin' => 'sessions#new', as: :new_session
-  post 'signin' => 'sessions#create', as: :save_new_session
+  get 'signin', to: 'sessions#new', as: :new_session
+  post 'signin', to: 'sessions#create', as: :save_new_session
 
-  delete 'signout' => 'sessions#destroy', as: :signout
+  delete 'signout', to: 'sessions#destroy', as: :signout
 
-  get 'users/:user_id' => 'users#show', as: :user
-  get 'users/:user_id/edit' => 'users#edit', as: :edit_user
-  patch 'users/:user_id' => 'users#update', as: :save_edit_user
+  get 'users/:user_id', to: 'users#show', as: :user
+  get 'users/:user_id/edit', to: 'users#edit', as: :edit_user
+  patch 'users/:user_id', to: 'users#update', as: :save_edit_user
 
-  get 'users/:user_id/accounts/:account_id' => 'accounts#show', as: :account
+  get 'users/:user_id/accounts/:account_id', to: 'accounts#show', as: :account
 
-  get 'users/:user_id/accounts/:account_id/transactions/new' => 'transactions#new', as: :new_transaction
-  post 'users/:user_id/accounts/:account_id/transactions' => 'transactions#create', as: :save_new_transaction
+  get 'users/:user_id/accounts/:account_id/transactions/new', to: 'transactions#new', as: :new_transaction
+  post 'users/:user_id/accounts/:account_id/transactions', to: 'transactions#create', as: :save_new_transaction
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

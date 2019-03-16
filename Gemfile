@@ -1,10 +1,11 @@
 source 'https://rubygems.org'
 
-
+# Activemodel
+gem 'activemodel'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails'
+# Rubocop
 gem 'rubocop'
-gem 'activemodel'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', '~> 1.3.6'
 # Use SCSS for stylesheets
@@ -34,14 +35,18 @@ gem 'bcrypt'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+# Money
 gem 'money'
+
+# Puma
 gem 'puma'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
 
-  gem 'cucumber-rails', :require => false
+  # Cucumber-rails
+  gem 'cucumber-rails', require: false
   # database_cleaner is not required, but highly recommended
   gem 'database_cleaner'
 
@@ -62,4 +67,3 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 end
-
