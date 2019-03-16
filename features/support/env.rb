@@ -5,42 +5,6 @@
 # files.
 
 require 'cucumber/rails'
-require 'capybara/poltergeist'
-require 'factory_bot'
-
-require 'rack_session_access/capybara'
-require 'site_prism'
-
-# Firefox is default
-# Capybara.javascript_driver = :selenium
-
-Capybara.default_max_wait_time = 10
-Capybara.default_selector = :css
-
-if ENV['USE_CHROME']
-  # use the chrome driver
-  Capybara.default_driver = :selenium
-  Capybara.register_driver :selenium do |app|
-    Capybara::Selenium::Driver.new(app, browser: :chrome)
-  end
-else
-  # use the headless webkit driver via poltergeist / phantomjs
-  Capybara.default_driver = :poltergeist
-  Capybara.register_driver :poltergeist do |app|
-    options = {
-      js_errors: false, # default true
-      timeout: 120,
-      debug: false,
-      phantomjs: Phantomjs.path,
-      phantomjs_options: ['--load-images=no', '--disk-cache=false'],
-      inspector: true
-    }
-    Capybara::Poltergeist::Driver.new(app, options)
-  end
-end
-
-# Capybara.save_and_open_page_path = "#{Rails.root}/tmp/error_screenshots"
-Capybara.save_path = "#{Rails.root}/tmp/error_screenshots"
 
 # Capybara defaults to CSS3 selectors rather than XPath.
 # If you'd prefer to use XPath, just uncomment this line and adjust any
@@ -66,27 +30,25 @@ ActionController::Base.allow_rescue = false
 
 # Remove/comment out the lines below if your app doesn't have a database.
 # For some databases (like MongoDB and CouchDB) you may need to use :truncation instead.
-# begin
-#   DatabaseCleaner.strategy = :transaction
-# rescue NameError
-#   raise "You need to add database_cleaner to your Gemfile (in the :test group) if you wish to use it."
-# end
-
-PERSISTED_TABLES = %w( users )
-DatabaseCleaner.strategy = :truncation, { except: PERSISTED_TABLES }
-DatabaseCleaner.clean_with :truncation
+begin
+  PERSISTED_TABLES = %w( users )
+  DatabaseCleaner.strategy = :truncation, { except: PERSISTED_TABLES }
+  DatabaseCleaner.clean_with :truncation
+rescue NameError
+  raise "You need to add database_cleaner to your Gemfile (in the :test group) if you wish to use it."
+end
 
 # You may also want to configure DatabaseCleaner to use different strategies for certain features and scenarios.
 # See the DatabaseCleaner documentation for details. Example:
 #
 #   Before('@no-txn,@selenium,@culerity,@celerity,@javascript') do
-#     # { :except => [:widgets] } may not do what you expect here
+#     # { except: [:widgets] } may not do what you expect here
 #     # as Cucumber::Rails::Database.javascript_strategy overrides
 #     # this setting.
 #     DatabaseCleaner.strategy = :truncation
 #   end
 #
-#   Before('~@no-txn', '~@selenium', '~@culerity', '~@celerity', '~@javascript') do
+#   Before('not @no-txn', 'not @selenium', 'not @culerity', 'not @celerity', 'not @javascript') do
 #     DatabaseCleaner.strategy = :transaction
 #   end
 #
@@ -96,3 +58,10 @@ DatabaseCleaner.clean_with :truncation
 # See https://github.com/cucumber/cucumber-rails/blob/master/features/choose_javascript_database_strategy.feature
 Cucumber::Rails::Database.javascript_strategy = :truncation
 
+if ENV['USE_CHROME']
+  # use the chrome driver
+  Capybara.default_driver = :selenium
+  Capybara.register_driver :selenium do |app|
+    Capybara::Selenium::Driver.new(app, browser: :chrome)
+  end
+end

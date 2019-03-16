@@ -43,7 +43,6 @@ group :development, :test do
   gem 'cucumber-rails', :require => false
   # database_cleaner is not required, but highly recommended
   gem 'database_cleaner'
-  gem "factory_bot"
 
   # WebDriver is a tool for writing automated tests of websites. It aims to mimic the behaviour of a real user [...]
   gem 'selenium-webdriver'
@@ -51,20 +50,11 @@ group :development, :test do
   # Easy installation and use of chromedriver, the Chromium project's selenium webdriver adapter
   gem 'chromedriver-helper'
 
-  # Poltergeist is a driver for Capybara that allows you to run your tests on a headless WebKit [...]
-  gem 'poltergeist'
-
-  # Auto-install phantomjs on demand for current platform. Comes with poltergeist integration
-  gem 'phantomjs'
-
   # When a Cucumber step fails, it is useful to create a screenshot image and HTML file of the current page
   gem 'capybara-screenshot'
 
   # Rack middleware that provides access to rack.session environment
   gem 'rack_session_access'
-
-  # SitePrism gives you a simple, clean and semantic DSL for describing your site using the Page Object Model
-  gem 'site_prism'
 end
 
 group :development do
