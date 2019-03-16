@@ -52,9 +52,6 @@ group :development, :test do
 
   # When a Cucumber step fails, it is useful to create a screenshot image and HTML file of the current page
   gem 'capybara-screenshot'
-
-  # Rack middleware that provides access to rack.session environment
-  gem 'rack_session_access'
 end
 
 group :development do
