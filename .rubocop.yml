@@ -1,7 +1,6 @@
 AllCops:
   EnabledByDefault: true
   Exclude:
-    - config/**/*
     - db/migrate/*
     - db/schema.rb
     - features/support/env.rb
@@ -17,6 +16,7 @@ Metrics/LineLength:
   Max: 100
   Exclude:
     - Gemfile
+    - config/routes.rb
 
 Style/Copyright:
   Enabled: false

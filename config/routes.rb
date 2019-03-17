@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   get 'signup', to: 'users#new', as: :new_user
   post 'signup', to: 'users#create', as: :save_new_user
 
