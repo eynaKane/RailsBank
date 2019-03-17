@@ -1,7 +1,6 @@
 AllCops:
   EnabledByDefault: true
   Exclude:
-    - bin/*
     - config/**/*
     - db/migrate/*
     - db/schema.rb
