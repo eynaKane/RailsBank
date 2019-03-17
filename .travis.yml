@@ -2,12 +2,8 @@ language: ruby
 rvm:
  - 2.4
 
-cucumber: 
-  script:
+script:
     - bundle exec cucumber
-
-rubocop:
-  script:
     - bundle exec rubocop
 
 notifications:
