@@ -2,9 +2,6 @@ AllCops:
   EnabledByDefault: true
   Exclude:
     - db/schema.rb
-    - lib/tasks/cucumber.rake
-    - script/cucumber
-    - test/test_helper.rb
     - vendor/bundle/**/*
 
 Metrics/AbcSize:
@@ -15,6 +12,10 @@ Metrics/LineLength:
   Exclude:
     - Gemfile
     - config/routes.rb
+
+Rails/FilePath:
+  Exclude:
+    - lib/tasks/cucumber.rake
 
 Style/Copyright:
   Enabled: false
