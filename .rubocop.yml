@@ -1,9 +1,7 @@
 AllCops:
   EnabledByDefault: true
   Exclude:
-    - db/migrate/*
     - db/schema.rb
-    - features/support/env.rb
     - lib/tasks/cucumber.rake
     - script/cucumber
     - test/test_helper.rb
@@ -28,4 +26,7 @@ Style/DocumentationMethod:
   Enabled: false
 
 Style/MethodCallWithArgsParentheses:
+  Enabled: false
+
+Style/MissingElse:
   Enabled: false
